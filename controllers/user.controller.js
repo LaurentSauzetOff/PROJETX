@@ -6,18 +6,41 @@ module.exports.getAllUsers = async (req, res) => {
   res.status(200).json(users);
 };
 
-module.exports.userInfo = (req, res) => {
+// Ancienne version
+/* module.exports.userInfo = (req, res) => {
     console.log(req.params)
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
-  UserModel.findById(req.params.id, (err, docs) => {
-    if (!err) res.send(docs);
+  UserModel.findById(req.params.id, async (err, docs) => {
+    if (!err) await res.send(docs);
     else console.log("ID unknown : " + err);
   }).select("-password");
+}; */
+
+// Nouvelle version
+module.exports.userInfo = async (req, res) => {
+  console.log(req.params);
+  if (!ObjectID.isValid(req.params.id)) {
+    return res.status(400).send("ID unknown : " + req.params.id);
+  }
+
+  try {
+    const user = await UserModel.findById(req.params.id)
+      .select("-password")
+      .exec();
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.log("Error retrieving user: " + error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
-module.exports.updateUser = async (req, res) => {
+/* module.exports.updateUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -116,3 +139,4 @@ module.exports.unfollow = async (req, res) => {
     return res.status(500).json({ message: err });
   }
 };
+ */
