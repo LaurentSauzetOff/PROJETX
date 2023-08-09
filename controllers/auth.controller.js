@@ -24,16 +24,23 @@ module.exports.signUp = async (req, res) => {
 
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log("req.body is :", req.body)
   try {
-    const user = await UserModel.login(email, password);
+    const user = await UserModel.login("dominique@gmail.com", "Motdepasse03-");
+
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge });
     res.status(200).json({ user: user._id });
   } catch (err) {
+    console.log(err);
     const errors = signInErrors(err);
     res.status(200).json({ errors });
   }
+};
+
+module.exports.signInTest = function(req, res)  {
+  // const { email, password } = req.body;
+  console.log("body is :", req.body)
 };
 
 module.exports.logout = (req, res) => {
