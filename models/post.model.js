@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const postSchema = new mongoose.Schema(
+const PostSchema = new mongoose.Schema(
   {
     posterId: {
       type: String,
@@ -38,4 +38,4 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("post", postSchema);
+module.exports = mongoose.model("post", PostSchema);
