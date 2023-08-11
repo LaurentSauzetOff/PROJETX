@@ -2,6 +2,7 @@ const UserModel = require("../models/user.model");
 const fs = require("fs");
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
+const { uploadErrors } = require("../utils/errors.utils");
 
 module.exports.uploadProfil = async (req, res) => {
   try {
@@ -17,7 +18,6 @@ module.exports.uploadProfil = async (req, res) => {
     const errors = uploadErrors(err);
     return res.status(201).json({ errors });
   }
-
   const fileName = req.body.name + ".jpg";
 
   await pipeline(
