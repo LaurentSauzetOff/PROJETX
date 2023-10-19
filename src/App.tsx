@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import { Outlet, Navigate, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "./redux/rootState.tsx";
+
 
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
@@ -14,7 +14,7 @@ interface User {
 }
 /* Fonction pour protéger certaines routes */
 function Layout() {
-  const user: User | null = useSelector((state: RootState) => state.user);
+  const user: User | null = useSelector((state) => state.user);
   const location = window.location.pathname;
 
   return user && user.token ? (
@@ -24,7 +24,7 @@ function Layout() {
   );
 }
 function App() {
-  const theme = useSelector((state: RootState) => state.theme);
+  const theme = useSelector((state) => state.theme);
 
   return (
     <div className={`w-full min-h-[100vh] ${theme}`}>
