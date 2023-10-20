@@ -20,6 +20,10 @@ const Login: React.FC<LoginProps> = () => {
     mode: "onChange",
   });
 
+  const onSubmit = async(data) => {
+    
+  }
+
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
@@ -44,7 +48,7 @@ const Login: React.FC<LoginProps> = () => {
 
           <form
             className="py-8 flex flex-col gap-5="
-            /* onSubmit={handleSubmit(onSubmit)} */
+            onSubmit={handleSubmit(onSubmit)}
           >
             <TextInput
               name="email"
@@ -142,7 +146,7 @@ const Login: React.FC<LoginProps> = () => {
 
           <div className="mt-16 text-center">
             <p className="text-white text-base">
-              Connect with friedns & have share for fun
+              Connect with friends & have share for fun
             </p>
             <span className="text-sm text-white/80">
               Share memories with friends and the world.

@@ -24,7 +24,7 @@ function Layout() {
   );
 }
 function App() {
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: string) => state.theme);
 
   return (
     <div className={`w-full min-h-[100vh] ${theme}`}>
