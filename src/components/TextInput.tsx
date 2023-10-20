@@ -5,7 +5,7 @@ interface TextInputProps {
   name: string;
   placeholder: string;
   type: string;
-  register?: string; // Utilisez le bon type de register ici
+  register: string; // Utilisez le bon type de register ici
   styles: string;
   labelStyle: string;
   error: string | FieldError | undefined;
