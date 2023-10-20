@@ -10,11 +10,17 @@ const Register = lazy(() => import("./pages/Register"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
 interface User {
+  user: string;
   token: string;
+}
+
+interface AppState {
+  theme: string;
+  user: User | null;
 }
 /* Fonction pour protéger certaines routes */
 function Layout() {
-  const user: User | null = useSelector((state) => state.user);
+  const user: User | null = useSelector((state: AppState) => state.user);
   const location = window.location.pathname;
 
   return user && user.token ? (
@@ -24,7 +30,7 @@ function Layout() {
   );
 }
 function App() {
-  const theme = useSelector((state: string) => state.theme);
+  const theme = useSelector((state: AppState) => state.theme);
 
   return (
     <div className={`w-full min-h-[100vh] ${theme}`}>
