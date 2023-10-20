@@ -5,7 +5,7 @@ interface ThemeState {
   theme: string;
 }
 
-const defaultTheme: string = "light";
+const defaultTheme: string = "dark";
 
 const storedTheme = window?.localStorage.getItem("theme");
 const initialState: ThemeState = {
